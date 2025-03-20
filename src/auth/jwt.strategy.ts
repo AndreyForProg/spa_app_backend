@@ -21,14 +21,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: JwtPayload) {
     const user = await this.usersService.findOne(payload.sub);
 
-    if (!user || !user.dataValues.isActive) {
+    if (!user) {
       throw new UnauthorizedException('User is not active or does not exist');
     }
 
     return {
       id: payload.sub,
-      username: payload.username,
-      role: payload.role,
+      email: payload.email,
     };
   }
 }

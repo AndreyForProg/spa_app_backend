@@ -6,7 +6,7 @@ import { LoginInput } from './dto/login.input';
 import { RegisterInput } from './dto/register.input';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { CurrentUser } from './current-user.decorator';
-import { UserType } from '../users/dto/user.type';
+import { User } from '../users/user.model';
 import { RefreshTokenInput } from './dto/refresh-token.input';
 
 @Resolver()
@@ -28,7 +28,7 @@ export class AuthResolver {
     return this.authService.refreshTokens(refreshToken);
   }
 
-  @Query(() => UserType)
+  @Query(() => User)
   @UseGuards(JwtAuthGuard)
   async me(@CurrentUser() user: any) {
     return user;

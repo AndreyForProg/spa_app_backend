@@ -8,6 +8,16 @@ type AuthPayload {
   user: UserType!
 }
 
+type Comment {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -26,13 +36,18 @@ input LoginInput {
 }
 
 type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): Comment!
   createUser(createUserInput: CreateUserInput!): UserType!
   login(input: LoginInput!): AuthPayload!
   refreshTokens(input: RefreshTokenInput!): AuthPayload!
   register(input: RegisterInput!): AuthPayload!
+  removeComment(id: Int!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
 }
 
 type Query {
+  comment(id: Int!): Comment!
+  comments: [Comment!]!
   me: UserType!
   user(id: String!): UserType!
   users: [UserType!]!
@@ -46,6 +61,12 @@ input RegisterInput {
   email: String!
   password: String!
   username: String!
+}
+
+input UpdateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 type UserType {

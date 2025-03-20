@@ -19,8 +19,8 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<User | null> {
-    const user = await this.usersService.findByUsername(username);
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.usersService.findByEmail(email);
     if (!user) {
       return null;
     }
@@ -34,16 +34,12 @@ export class AuthService {
       return null;
     }
 
-    // Не возвращаем пароль в результате
     const { password: _, ...result } = user.toJSON();
-    return result;
+    return result as User;
   }
 
   async login(loginInput: LoginInput) {
-    const user = await this.validateUser(
-      loginInput.username,
-      loginInput.password,
-    );
+    const user = await this.validateUser(loginInput.email, loginInput.password);
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
@@ -72,8 +68,7 @@ export class AuthService {
   generateTokens(user: any) {
     const payload: JwtPayload = {
       sub: user.id,
-      username: user.username,
-      role: user.role,
+      email: user.email,
     };
 
     return {

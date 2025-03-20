@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { UserType } from '../users/dto/user.type';
+import { User } from '../users/user.model';
 
 @ObjectType()
 export class AuthPayload {
@@ -9,6 +9,6 @@ export class AuthPayload {
   @Field()
   refresh_token: string;
 
-  @Field(() => UserType)
-  user: UserType;
+  @Field(() => User)
+  user: User;
 }

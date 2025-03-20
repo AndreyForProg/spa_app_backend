@@ -4,10 +4,6 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 @InputType()
 export class RegisterInput {
   @Field()
-  @IsNotEmpty({ message: 'Username cannot be empty' })
-  username: string;
-
-  @Field()
   @IsEmail({}, { message: 'Invalid email format' })
   email: string;
 

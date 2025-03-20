@@ -6,6 +6,7 @@ import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -16,13 +17,15 @@ import { AuthModule } from './auth/auth.module';
     // Функциональные модули
     UsersModule,
     AuthModule,
+    // Комментарии
+    CommentsModule,
     // Конфигурация GraphQL
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: true,
       sortSchema: true,
       context: ({ req }) => ({ req }),
-      playground: true, // Включаем playground для разработки
+      playground: false, // Включаем playground для разработки
     }),
   ],
 })
