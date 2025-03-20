@@ -10,7 +10,7 @@ import {
 import { User } from '../users/user.model';
 import { IsUrl } from 'class-validator';
 
-@ObjectType('Comment') // GraphQL декоратор
+@ObjectType() // GraphQL декоратор
 @Table
 export class Comment extends Model<Comment> {
   // Указываем тип для модели
@@ -22,13 +22,6 @@ export class Comment extends Model<Comment> {
   })
   declare id: string;
 
-  @Field() // GraphQL String
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  declare text: string;
-
   @Field(() => String) // Указываем GraphQL String
   @ForeignKey(() => User)
   @Column({
@@ -37,20 +30,19 @@ export class Comment extends Model<Comment> {
   })
   declare userId: string;
 
-  @Field({ nullable: true }) // nullable для файла
+  @Field() // GraphQL String
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
   })
-  declare filePath?: string;
+  declare text: string;
 
   @Field({ nullable: true }) // nullable для файла
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  @IsUrl({}, { message: 'Invalid URL format' })
-  declare homePage?: string;
+  declare filePath?: string;
 
   @Field(() => String, { nullable: true }) // nullable для parentId
   @ForeignKey(() => Comment)

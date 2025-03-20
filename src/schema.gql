@@ -7,10 +7,9 @@ type User {
 
 type Comment {
   id: ID!
-  text: String!
   userId: String!
+  text: String!
   filePath: String
-  homePage: String
   parentId: String
   createdAt: DateTime!
   user: User
@@ -23,20 +22,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  users: [User!]!
-  user(id: String!): User!
   getComments: [Comment!]!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
   createComment(input: CreateCommentInput!): Boolean!
-}
-
-input CreateUserInput {
-  username: String
-  email: String!
-  role: String
 }
 
 input CreateCommentInput {

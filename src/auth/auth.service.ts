@@ -9,7 +9,7 @@ import { LoginInput } from './dto/login.input';
 import { RegisterInput } from './dto/register.input';
 import { ConfigService } from '../config/config.service';
 import { JwtPayload } from '../common/interfaces/jwt-payload.interface';
-import { User } from 'src/users/user.model';
+import { User } from '../users/user.model';
 
 @Injectable()
 export class AuthService {
@@ -48,13 +48,13 @@ export class AuthService {
     return this.generateTokens(user);
   }
 
-  async register(registerInput: RegisterInput) {
+  async register(registerInput: RegisterInput): Promise<User> {
     try {
       const user = await this.usersService.create(registerInput);
 
       // Не возвращаем пароль в результате
       const { password: _, ...result } = user.toJSON();
-      return this.generateTokens(result);
+      return result as User;
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
         throw new BadRequestException(

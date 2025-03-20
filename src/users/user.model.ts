@@ -9,7 +9,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-@ObjectType('User') // Add explicit name to avoid conflicts
+@ObjectType() // GraphQL декоратор
 @Table
 export class User extends Model<User> {
   // Обязательно указывайте тип модели

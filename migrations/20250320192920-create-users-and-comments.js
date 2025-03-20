@@ -42,10 +42,6 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      text: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
@@ -53,6 +49,10 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+      },
+      text: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       filePath: {
         type: Sequelize.STRING,

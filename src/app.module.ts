@@ -7,6 +7,8 @@ import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CommentsModule } from './comments/comments.module';
+import { printSchema } from 'graphql';
+import { writeFileSync } from 'fs';
 
 @Module({
   imports: [
@@ -24,8 +26,16 @@ import { CommentsModule } from './comments/comments.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
       sortSchema: true,
+      buildSchemaOptions: {
+        dateScalarMode: 'timestamp',
+      },
+      transformSchema: (schema) => {
+        console.log(printSchema(schema));
+        writeFileSync('./schema.graphql', printSchema(schema));
+        return schema;
+      },
       context: ({ req }) => ({ req }),
-      playground: true, // Включаем playground для разработки
+      playground: true,
     }),
   ],
 })
