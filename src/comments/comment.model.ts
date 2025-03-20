@@ -10,7 +10,7 @@ import {
 import { User } from '../users/user.model';
 import { IsUrl } from 'class-validator';
 
-@ObjectType() // GraphQL декоратор
+@ObjectType('Comment') // GraphQL декоратор
 @Table
 export class Comment extends Model<Comment> {
   // Указываем тип для модели

@@ -43,11 +43,9 @@ export class UsersService {
       throw new ConflictException('User with this email already exists');
     }
 
-    const existingByUsername = await this.findByUsername(
-      createUserInput.username,
-    );
+    const existingByUsername = await this.findByEmail(createUserInput.email);
     if (existingByUsername) {
-      throw new ConflictException('User with this username already exists');
+      throw new ConflictException('User with this email already exists');
     }
 
     return this.userModel.create(createUserInput as any);

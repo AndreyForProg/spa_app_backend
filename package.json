@@ -17,7 +17,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "db:migrate": "npx sequelize-cli db:migrate --config sequelize.config.js",
+    "db:migrate:undo": "npx sequelize-cli db:migrate:undo --config sequelize.config.js",
+    "db:create": "npx sequelize-cli db:create --config sequelize.config.js",
+    "db:drop": "npx sequelize-cli db:drop --config sequelize.config.js"
   },
   "dependencies": {
     "@nestjs/apollo": "^13.0.3",

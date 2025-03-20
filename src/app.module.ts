@@ -25,7 +25,7 @@ import { CommentsModule } from './comments/comments.module';
       autoSchemaFile: true,
       sortSchema: true,
       context: ({ req }) => ({ req }),
-      playground: false, // Включаем playground для разработки
+      playground: true, // Включаем playground для разработки
     }),
   ],
 })
